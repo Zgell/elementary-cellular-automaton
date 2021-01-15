@@ -17,8 +17,27 @@ public:
         board.flip(31);  // Set one cell in the middle to 1
     }
     void print_rule() {
-        int rule_number = bin2dec_8(rule);
+        int rule_number = bin2dec_8(rule);  // Get rule in decimal
         std::cout << "Rule " << rule_number << std::endl;
+    }
+    void update() {
+        /* Update "board" based on the rule */
+        // NOTE: Replace w/ dynamic allocation in the future?
+        std::bitset<64> new_board;
+        new_board.reset();
+        for (int i = 0; i < 64; i++) {
+            switch (i) {
+                case 0:
+                    // Case that requires wrap-around
+                    break;
+                case 63:
+                    // Other case that requires wrap-around
+                    break;
+                default:
+                    // The default case
+                    break;
+            }
+        }
     }
 };
 
