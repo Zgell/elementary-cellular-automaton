@@ -14,6 +14,7 @@ int bin2dec_3(std::bitset<3> &in) {
 }
 
 void print_board(std::bitset<64> &board) {
+    // Unicode block elements, see ref. #3 in main.cpp
     std::string FULL = "\u2588";
     std::string EMPTY = "\u2591";
     for (int i = 63; i >= 0; i--) {
