@@ -3,43 +3,19 @@
 #include <cmath>
 #include <bitset>
 #include "func.h"
+
 /*
-class Automaton {
-private:
-    std::bitset<64> board;
-    std::bitset<8> rule;
-public:
-    Automaton(std::bitset<8> input_rule) {
-        rule = input_rule;
-        board.reset();  // Set all elements in "board" to zero
-        board.flip(31);  // Set one cell in the middle to 1
-    }
-    void print_rule() {
-        int rule_number = bin2dec_8(rule);  // Get rule in decimal
-        std::cout << "Rule " << rule_number << std::endl;
-    }
-    void update() {
-        //Update "board" based on the rule
-        // NOTE: Replace w/ dynamic allocation in the future?
-        std::bitset<64> new_board;
-        new_board.reset();
-        for (int i = 0; i < 64; i++) {
-            switch (i) {
-                case 0:
-                    // Case that requires wrap-around
-                    break;
-                case 63:
-                    // Other case that requires wrap-around
-                    break;
-                default:
-                    // The default case
-                    break;
-            }
-        }
-    }
-};
+    Implementation of Wolfram's Elementary Cellular Automata - By Zgell
+
+    See references at bottom of "main.cpp" file.
 */
+
+
 int main() {
+    // Clears terminal (Linux), see reference 2 for more details
+    std::cout << "\033[2J\033[1;1H";
+
+    // Unicode block elements for visualizing the rule (see ref. #3)
     std::string FULL = "\u2588";
     std::string EMPTY = "\u2591";
     int input_rule, sim_length;
@@ -56,11 +32,24 @@ int main() {
     board.flip(31);  // It's standard for ECA to have one "ON" cell in the middle
 
     print_board(board);
-    /*
+    
     for (int i = 0; i < sim_length; ++i) {
         update(board, input_rule);
         print_board(board);
     }
     return 0;
-    */
+    
 }
+
+/*
+    References:
+
+    [1] "Elementary Cellular Automaton" (inspiration for the project)
+    https://mathworld.wolfram.com/ElementaryCellularAutomaton.html
+
+    [2] "Clearing terminal in Linux with C++ code"
+    https://stackoverflow.com/questions/4062045/clearing-terminal-in-linux-with-c-code
+
+    [3] "Block Elements"
+    https://en.wikipedia.org/wiki/Block_Elements
+*/
