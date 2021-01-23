@@ -1,2 +1,11 @@
-# elementary-cellular-automaton
-A memory-efficient implementation of Wolfram's Elementary Cellular Automaton.
+# Wolfram's Elementary Cellular Automata
+My memory-efficient implementation of Wolfram's Elementary Cellular Automaton.
+
+This is a small project I started back in December 2020 because of my interest in cellular automata. Ever since I made my implementation of the Game of Life, I knew that if there was any other one I needed to do, it was this one.
+I originally wanted to go with a computationally-efficient design, but since this is a 1-dimensional cellular automaton, there's not much to optimize. So instead, I decided to take a memory-efficiency approach, which was only slightly more viable. The memory efficiency really boils down to the best ways to store board and rule information while also reusing as much data as possible as the algorithm executes.
+My initial design used an array of boolean values to store the states of the cells on the 64-cell board, as well as in the 8-cell board. I scrapped that for a few reasons however:
+1. I was having troubles working around some of the weird C++ behaviour. It wasn't an issue with single booleans but became increasingly prominent as I made the shift to a formal array.
+2. Boolean arrays weren't the most memory-efficient solution out there. Since each boolean is stored independently of each other in memory, they take up an entire byte for what only needs to be a true/false value. In theory, a byte should be able to hold 8 of them, so this was a clear indicator of inefficiency.
+
+What I discovered while reading through the C++ documentation was `std::bitset` (a bit more of an obscure data type in the standard library), which checked all of the boxes. It was a neater way of organizing several true/false values, and the data type came with a couple extra features that were much appreciated, such as the ability to directly convert strings or integers into bitsets. The biggest advantage by far was the memory efficiency however. I did some testing and found that in the case of a 64-bit bitset, it used only 8 bytes of memory, which gave it perfect memory efficiency as far as the board is concerned.
+One thing to point out is that although it was efficient for the board, I cannot say for sure if it reaches the same level of memory efficiency with some of the smaller bitsets, such as the internal implementation of the "rules". I did do some testing but it was inconclusive.
